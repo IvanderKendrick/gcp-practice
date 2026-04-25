@@ -27,3 +27,6 @@ steps:
 
 images:
   - "asia-southeast1-docker.pkg.dev/justlearntwo/my-repo/myapp:latest"
+
+options:
+  logging: CLOUD_LOGGING_ONLY
