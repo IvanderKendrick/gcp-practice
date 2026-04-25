@@ -19,7 +19,7 @@ def get_conn():
 
 @app.get("/")
 def home():
-    return {"message": "API jalan 🚀"}
+    return {"message": "API jalan 🚀 whusss ~"}
 
 @app.get("/users")
 def get_users():
