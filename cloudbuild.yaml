@@ -1,0 +1,29 @@
+steps:
+  # 1. Build Docker image
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      - "build"
+      - "-t"
+      - "asia-southeast1-docker.pkg.dev/justlearntwo/my-repo/myapp:latest"
+      - "."
+
+  # 2. Push ke Artifact Registry
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      - "push"
+      - "asia-southeast1-docker.pkg.dev/justlearntwo/my-repo/myapp:latest"
+
+  # 3. Deploy ke Cloud Run
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: gcloud
+    args:
+      - "run"
+      - "deploy"
+      - "myapp"
+      - "--image=asia-southeast1-docker.pkg.dev/justlearntwo/my-repo/myapp:latest"
+      - "--region=asia-southeast1"
+      - "--platform=managed"
+      - "--quiet"
+
+images:
+  - "asia-southeast1-docker.pkg.dev/justlearntwo/my-repo/myapp:latest"
